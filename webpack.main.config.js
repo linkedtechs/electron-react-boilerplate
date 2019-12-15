@@ -1,11 +1,10 @@
-const HTMLWebpackPlugin=require('html-webpack-plugin')
-path = require('path')
+// const HTMLWebpackPlugin=require('html-webpack-plugin')
+path = require('path');
 
 module.exports = {
 	entry: {
 		vendor: './src/main.ts',
 	},
-	mode: 'development',
 	target: 'electron-main',
 	module: {
 		rules: [{
@@ -15,7 +14,7 @@ module.exports = {
 		}],
 	},
 	plugins: [
-		new HTMLWebpackPlugin({template: './src/index.html'}),
+		// new HTMLWebpackPlugin({template: './src/index.html'}),
 	],
 	output: {
 		filename: 'main.js',

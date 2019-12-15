@@ -12,3 +12,8 @@
 cd <your-project-name>
 npm install
 ```
+## USage
+```
+npm run start-<dev/>prod>
+```
+This will build the main process which is Electron app, and render process, written in react. React will be using index.html
