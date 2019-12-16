@@ -3,14 +3,14 @@ path = require('path');
 
 module.exports = {
 	entry: {
-		vendor: './src/react.tsx',
+		vendor: './src/renderer/react.tsx',
 	},
 	target: 'electron-renderer',
 	devtool: 'source-map',
 	module: {
 		rules: [{
 			test: /\.tsx?$/,
-			include: /src/,
+			include: [path.resolve(__dirname, "src/renderer/"),],
 			use: [{loader: 'ts-loader'}],
 		}],
 	},
