@@ -1,10 +1,11 @@
 import { BrowserWindow } from 'electron';
 
-import isDev from 'electron-is-dev';
+// import isDev from 'electron-is-dev';
 import * as url from 'url';
 import * as path from 'path';
 
-// const isDev = true;
+const isProd = (process.env.NODE_ENV == 'production');
+
 export default class Main {
 	static mainWindow: Electron.BrowserWindow;
 	static application: Electron.App;
@@ -32,11 +33,18 @@ export default class Main {
 			protocol: 'file:',
 			slashes: true
 		}));
+		if (!isProd)
+		{
+			Main.mainWindow.webContents.openDevTools();
+		}
 
-		if (isDev)
-			Main.mainWindow.webContents.openDevTools()
-		
 		Main.mainWindow.on('closed', Main.onClose);
+	}
+
+	private static onCertificateError(event:any, _webContents:any, _url:any, _error:any, _certificate:any, callback:any) {
+		// todo: check certificate.fingerprint is what we expect
+		event.preventDefault();
+		callback(true); // everything is fine
 	}
 
 	static main(app: Electron.App, browserWindow: typeof BrowserWindow) {
@@ -45,7 +53,7 @@ export default class Main {
 		// so this class has no dependencies. This 
 		// makes the code easier to write tests for 
 
-		if (isDev) {
+		if (!isProd) {
 			console.log('Running in development');
 		} else {
 			console.log('Running in production');
@@ -54,5 +62,6 @@ export default class Main {
 		Main.application = app;
 		Main.application.on('window-all-closed', Main.onWindowAllClosed);
 		Main.application.on('ready', Main.onReady);
+		Main.application.on('certificate-error', Main.onCertificateError);
 	}
 }
