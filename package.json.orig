@@ -1,0 +1,168 @@
+{
+<<<<<<< HEAD
+	"name": "electron-react-boilerplate",
+	"version": "1.0.0",
+	"main": "./dist/main.js",
+	"homepage": "./",
+	"dependencies": {},
+=======
+	"name": "electron_setup",
+	"version": "1.0.0",
+	"main": "./dist/app.js",
+	"homepage": "./",
+	"dependencies": {
+		"electron-is-dev": "^1.1.0"
+	},
+>>>>>>> electron-with-webpack-only
+	"devDependencies": {
+		"@types/react": "^16.9.16",
+		"@types/react-dom": "^16.9.4",
+		"@typescript-eslint/eslint-plugin": "^2.11.0",
+		"@typescript-eslint/parser": "^2.11.0",
+<<<<<<< HEAD
+		"cross-env": "^6.0.3",
+=======
+		"copyfiles": "^2.1.1",
+>>>>>>> electron-with-webpack-only
+		"electron": "^7.1.5",
+		"electron-builder": "^21.2.0",
+		"electron-is-dev": "^1.1.0",
+		"eslint": "^6.7.2",
+		"eslint-config-google": "^0.14.0",
+		"eslint-plugin-react": "^7.17.0",
+<<<<<<< HEAD
+		"fork-ts-checker-webpack-plugin": "^3.1.1",
+=======
+		"file-loader": "^5.0.2",
+>>>>>>> electron-with-webpack-only
+		"html-webpack-plugin": "^3.2.0",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"ts-loader": "^6.2.1",
+		"typescript": "^3.7.3",
+		"webpack": "^4.41.2",
+<<<<<<< HEAD
+		"webpack-cli": "^3.3.10",
+		"webpack-dev-server": "^3.9.0"
+	},
+	"scripts": {
+		"build-main-dev-proc": "webpack --mode development --config ./webpack.main.config.js",
+		"build-main-prod-proc": "NODE_ENV=production && webpack --mode production --config ./webpack.main.config.js",
+		"build-renderer-dev-proc": "webpack --mode development --config ./webpack.renderer.config.js",
+		"build-renderer-prod-proc": "NODE_ENV=production && webpack --mode production --config ./webpack.renderer.config.js",
+		"start:dev": "npm run build-main-dev-proc && npm run build-renderer-dev-proc && electron ./dist/main.js",
+		"start:prod": "NODE_ENV=production && npm run build-main-prod-proc && npm run build-renderer-prod-proc && electron ./dist/main.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"package-linux": "electron-builder build --linux",
+		"start-render": "webpack-dev-server --mode development --config webpack.renderer.config.js",
+		"start": "NODE_ENV=production && webpack --mode production --config ./webpack.main.config.js && webpack --mode production --config ./webpack.renderer.config.js && electron ./dist/main.js"
+	},
+	"author": {
+		"name": "Sukhdeep Singh",
+		"email": "sd.corrin@gmail.com",
+		"url": "https://linkedtechs.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"electron",
+		"boilerplate",
+		"react",
+		"redux",
+		"sass"
+	],
+	"description": "ElectronReactBoilerPlate",
+	"build": {
+		"productName": "ElectronReactBoilerPlate",
+		"appId": "org.ElectronReactBoilerPlate",
+		"asar": true,
+        "extends": null,
+		"files": [
+			"dist/*",
+			"package.json",
+			"node_modules/**/*"
+=======
+		"webpack-cli": "^3.3.10"
+	},
+	"scripts": {
+		"start:webpack": "rm -rf dist/ && npm run build && electron ./dist/app.js",
+		"start:debug": "npm run build && electron --inspect-brk=3245 ./dist/app.js",
+		"html": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
+		"png": "copyfiles -u 1 src/**/*.png src/**/*.css dist/",
+		"build": "rm -rf dist/ && tsc && npm run html ",
+		"start": "npm run build && electron ./dist/app.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dist": "rm -rf dist/ && tsc && npm run html && electron-builder"
+	},
+	"author": "",
+	"license": "ISC",
+	"keywords": [],
+	"description": "",
+	"build": {
+		"appId": "oneoften",
+		"files": [
+			"./dist/*",
+			"./dist/**/*",
+			"./dist/app.js"
+>>>>>>> electron-with-webpack-only
+		],
+		"dmg": {
+			"contents": [
+				{
+<<<<<<< HEAD
+					"x": 130,
+					"y": 220
+				},
+				{
+					"x": 410,
+					"y": 220,
+=======
+					"x": 110,
+					"y": 150
+				},
+				{
+					"x": 240,
+					"y": 150,
+>>>>>>> electron-with-webpack-only
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		},
+<<<<<<< HEAD
+		"win": {
+			"target": [
+				"nsis",
+				"msi"
+			]
+		},
+		"linux": {
+			"target": [
+				"deb"
+			],
+			"category": "Development"
+		},
+		"directories": {
+			"buildResources": "assets",
+			"output": "release"
+		},
+		"publish": {
+			"provider": "github",
+			"owner": "electron-react-boilerplate",
+			"repo": "electron-react-boilerplate",
+			"private": false
+=======
+		"linux": {
+			"target": [
+				"AppImage"
+			]
+		},
+		"win": {
+			"target": "squirrel",
+			"icon": "build/favicon.ico"
+		},
+		"directories": {
+			"buildResources": "assets"
+>>>>>>> electron-with-webpack-only
+		}
+	}
+}

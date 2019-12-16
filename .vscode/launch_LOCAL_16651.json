@@ -1,0 +1,43 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Electron: Main",
+			"program": "${workspaceFolder}/dist/main.js",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+			/* "runtimeArgs": [
+				"--remote-debugging-port=9223",
+				"."
+			], */
+			"runtimeArgs": [
+                ".",
+                "--enable-logging"
+            ],
+			"env": {},
+			"outputCapture": "std",
+			"windows": {
+				"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+			}
+		},
+		{
+			"name": "Electron: Renderer",
+			"type": "chrome",
+			"request": "attach",
+			"port": 9223,
+			"webRoot": "${workspaceRoot}",
+			"timeout": 30000
+		}
+	],
+	"compounds": [
+		{
+			"name": "Electron: All",
+			"configurations": [
+				"Electron: Main",
+				"Electron: Renderer"
+			]
+		}
+	]
+}
