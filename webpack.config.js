@@ -1,24 +1,54 @@
-const HTMLWebpackPlugin=require('html-webpack-plugin')
-path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+path = require('path');
 
 module.exports = {
-	entry: {
-		vendor: './src/main.ts',
+	entry: { main: `./src/app.ts` },
+	resolve: {
+		extensions: ['.ts'],
+		modules: ['node_modules'],
 	},
-	mode: 'development',
 	target: 'electron-main',
 	module: {
 		rules: [{
 			test: /\.ts?$/,
 			include: /src/,
 			loader: 'ts-loader',
+		},
+		{
+			test: /\.(jpe?g|png|gif|svg)$/i,
+			include: '/src/assets/images/',
+			/* Exclude fonts while working with images, */
+			exclude: path.resolve(__dirname, '../src/assets/fonts'),
+			use: [{
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'images/',
+				},
+			}],
+		},
+		{
+			test: /\.(woff(2)?|ttf|eot|svg|otf)(\?v=\d+\.\d+\.\d+)?$/,
+			/* Exclude images while working with fonts, */
+			exclude: path.resolve(__dirname, '../src/assets/images'),
+			use: [{
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'fonts/',
+				},
+			}],
 		}],
 	},
+	node: {
+		__dirname: false,
+		__filename: false,
+	},
 	plugins: [
-		new HTMLWebpackPlugin({template: './src/index.html'}),
+		new HTMLWebpackPlugin({ template: './src/index.html' }),
 	],
 	output: {
-		filename: 'main.js',
-		path: path.resolve(__dirname, 'dist'),
+		filename: 'app.js',
+		//path: path.resolve(__dirname, 'dist'),
 	},
 };

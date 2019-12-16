@@ -1,32 +1,78 @@
 {
-  "name": "electron_setup",
-  "version": "1.0.0",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
-    "@typescript-eslint/eslint-plugin": "^2.11.0",
-    "@typescript-eslint/parser": "^2.11.0",
-    "electron": "^7.1.5",
-    "eslint": "^6.7.2",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.17.0",
-    "html-webpack-plugin": "^3.2.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.3",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
-  },
-  "scripts": {
-    "build": "webpack --config ./webpack.config.js",
-    "start": "npm run build && electron ./dist/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
-  "description": ""
+	"name": "electron_setup",
+	"version": "1.0.0",
+	"main": "./dist/app.js",
+	"homepage": "./",
+	"dependencies": {
+		"electron-is-dev": "^1.1.0"
+	},
+	"devDependencies": {
+		"@types/react": "^16.9.16",
+		"@types/react-dom": "^16.9.4",
+		"@typescript-eslint/eslint-plugin": "^2.11.0",
+		"@typescript-eslint/parser": "^2.11.0",
+		"copyfiles": "^2.1.1",
+		"electron": "^7.1.5",
+		"electron-builder": "^21.2.0",
+		"electron-is-dev": "^1.1.0",
+		"eslint": "^6.7.2",
+		"eslint-config-google": "^0.14.0",
+		"eslint-plugin-react": "^7.17.0",
+		"file-loader": "^5.0.2",
+		"html-webpack-plugin": "^3.2.0",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"ts-loader": "^6.2.1",
+		"typescript": "^3.7.3",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10"
+	},
+	"scripts": {
+		"start:webpack": "rm -rf dist/ && npm run build && electron ./dist/app.js",
+		"start:debug": "npm run build && electron --inspect-brk=3245 ./dist/app.js",
+		"html": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
+		"png": "copyfiles -u 1 src/**/*.png src/**/*.css dist/",
+		"build": "rm -rf dist/ && tsc && npm run html ",
+		"start": "npm run build && electron ./dist/app.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dist": "rm -rf dist/ && tsc && npm run html && electron-builder"
+	},
+	"author": "",
+	"license": "ISC",
+	"keywords": [],
+	"description": "",
+	"build": {
+		"appId": "oneoften",
+		"files": [
+			"./dist/*",
+			"./dist/**/*",
+			"./dist/app.js"
+		],
+		"dmg": {
+			"contents": [
+				{
+					"x": 110,
+					"y": 150
+				},
+				{
+					"x": 240,
+					"y": 150,
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		},
+		"linux": {
+			"target": [
+				"AppImage"
+			]
+		},
+		"win": {
+			"target": "squirrel",
+			"icon": "build/favicon.ico"
+		},
+		"directories": {
+			"buildResources": "assets"
+		}
+	}
 }
